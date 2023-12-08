@@ -11,6 +11,7 @@ namespace examenporject_Frameworks_zenodesp.Models
         public string Description { get; set; }
         [Display(Name = "Employee")]
         [ForeignKey("EmployeeUser")]
+        public string EmployeeId { get; set; }
         public EmployeeUser Employee { get; set; }
         [Display(Name = "Regarding")]
         [ForeignKey("Complaint")]
