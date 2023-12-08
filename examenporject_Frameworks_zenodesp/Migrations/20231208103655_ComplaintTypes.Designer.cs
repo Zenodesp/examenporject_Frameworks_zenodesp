@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using examenporject_Frameworks_zenodesp.Data;
 
@@ -11,9 +12,11 @@ using examenporject_Frameworks_zenodesp.Data;
 namespace examenporject_Frameworks_zenodesp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231208103655_ComplaintTypes")]
+    partial class ComplaintTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,10 +281,6 @@ namespace examenporject_Frameworks_zenodesp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ComplaintTypeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -301,8 +300,6 @@ namespace examenporject_Frameworks_zenodesp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ComplaintTypeId");
-
                     b.HasIndex("complaintLoggerId");
 
                     b.ToTable("Complaints");
@@ -316,12 +313,6 @@ namespace examenporject_Frameworks_zenodesp.Migrations
                     b.Property<string>("TypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("deleted")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -400,17 +391,9 @@ namespace examenporject_Frameworks_zenodesp.Migrations
 
             modelBuilder.Entity("examenporject_Frameworks_zenodesp.Models.Complaint", b =>
                 {
-                    b.HasOne("examenporject_Frameworks_zenodesp.Models.ComplaintType", "ComplaintType")
-                        .WithMany()
-                        .HasForeignKey("ComplaintTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("examenporject_Frameworks_zenodesp.Areas.Identity.Data.EmployeeUser", "complaintLogger")
                         .WithMany()
                         .HasForeignKey("complaintLoggerId");
-
-                    b.Navigation("ComplaintType");
 
                     b.Navigation("complaintLogger");
                 });

@@ -15,6 +15,11 @@ namespace examenporject_Frameworks_zenodesp.Models
         public string EmployeeId { get; set; }
         public EmployeeUser? complaintLogger { get; set; }
 
+        [Display(Name = "Complaint Type")]
+        [ForeignKey("ComplaintType")]
+        public string ComplaintTypeId { get; set; }
+        public ComplaintType? ComplaintType { get; set; }
+
         [Display(Name = "Posted on")]
         [DataType(DataType.Date)]
         public DateTime created { get; set; } = DateTime.Now;

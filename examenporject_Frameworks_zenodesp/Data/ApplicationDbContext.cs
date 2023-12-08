@@ -56,6 +56,7 @@ namespace examenporject_Frameworks_zenodesp.Data
 
             EmployeeUser dummy = context.Users.First(g => g.UserName == "Dummy");
             EmployeeUser admin = context.Users.First(g => g.UserName == "Admin");
+            ComplaintType dummyType = context.ComplaintType.First(g => g.TypeName == "dummy");
 
             if (!context.Roles.Any())
             {
@@ -70,7 +71,7 @@ namespace examenporject_Frameworks_zenodesp.Data
 
             if (!context.Complaints.Any())
             {
-                context.Complaints.Add(new Complaint { Description = "dummy", EmployeeId = dummy.Id, complaintLogger = dummy, created = DateTime.Now, deleted = DateTime.Now });
+                context.Complaints.Add(new Complaint { Description = "dummy", EmployeeId = dummy.Id, complaintLogger = dummy, ComplaintTypeId = dummyType.Id, created = DateTime.Now, deleted = DateTime.Now });
                 context.SaveChanges();
             }
              Complaint dummyComplaint = context.Complaints.First(g => g.Description == "dummy");
@@ -79,9 +80,16 @@ namespace examenporject_Frameworks_zenodesp.Data
                 context.Appointment.Add(new Appointment { Description = "dummy", Employee = dummy, Complaint = dummyComplaint, created = DateTime.Now, deleted = DateTime.Now });
                 context.SaveChanges();
             }
+            if (!context.ComplaintType.Any())
+            {
+                context.ComplaintType.Add(new ComplaintType { Id = "dummy", TypeName = "dummy" });
+                context.SaveChanges();
+            }
 
 
         }
+
+        public DbSet<examenporject_Frameworks_zenodesp.Models.ComplaintType> ComplaintType { get; set; } = default!;
 
 
     }

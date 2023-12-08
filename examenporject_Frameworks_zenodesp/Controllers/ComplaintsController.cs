@@ -70,6 +70,8 @@ namespace examenporject_Frameworks_zenodesp.Controllers
         // GET: Complaints/Create
         public IActionResult Create()
         {
+            
+            ViewData["ComplaintTypeId"] = new SelectList(_context.ComplaintType.Where(t => t.deleted > DateTime.Now).OrderBy(t => t.TypeName), "Id", "TypeName");
             return View();
         }
 
@@ -78,12 +80,13 @@ namespace examenporject_Frameworks_zenodesp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,EmployeeId,created,deleted")] Complaint complaint)
+        public async Task<IActionResult> Create([Bind("Id,Description,EmployeeId,ComplaintTypeId,created,deleted")] Complaint complaint)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(complaint);
                 complaint.complaintLogger = await _context.Users.FindAsync(complaint.EmployeeId);
+                complaint.ComplaintType = await _context.ComplaintType.FindAsync(complaint.ComplaintTypeId);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -111,7 +114,7 @@ namespace examenporject_Frameworks_zenodesp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,EmployeeId,created,deleted")] Complaint complaint)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,EmployeeId,ComplaintTypeId,created,deleted")] Complaint complaint)
         {
             if (id != complaint.Id)
             {

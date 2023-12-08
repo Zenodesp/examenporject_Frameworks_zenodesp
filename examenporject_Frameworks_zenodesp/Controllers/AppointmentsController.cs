@@ -48,7 +48,7 @@ namespace examenporject_Frameworks_zenodesp.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["ComplaintId"] = new SelectList(_context.Complaints, "Id", "Id");
+            ViewData["ComplaintId"] = new SelectList(_context.Complaints, "Id", "UserName");
             return View();
         }
 
@@ -62,6 +62,7 @@ namespace examenporject_Frameworks_zenodesp.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(appointment);
+                appointment.Complaint = await _context.Complaints.FindAsync(appointment.ComplaintId);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
