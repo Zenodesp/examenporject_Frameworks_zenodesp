@@ -7,6 +7,6 @@ namespace examenporject_Frameworks_zenodesp.Areas.Identity.Data
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Department { get; set; }
+        public string? Department { get; set; }
     }
 }

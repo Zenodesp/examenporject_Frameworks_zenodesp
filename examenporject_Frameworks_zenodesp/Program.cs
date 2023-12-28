@@ -1,6 +1,7 @@
 using examenporject_Frameworks_zenodesp.Areas.Identity.Data;
 using examenporject_Frameworks_zenodesp.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 
 namespace examenporject_Frameworks_zenodesp
@@ -21,6 +22,14 @@ namespace examenporject_Frameworks_zenodesp
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 ;
+
+            // Add globalisation/localistaion services
+
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Translations");
+            builder.Services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -39,6 +48,16 @@ namespace examenporject_Frameworks_zenodesp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            var supportedCultures = new[]
+           {
+                "en-US", "fr", "nl"
+            };
+            var localisationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localisationOptions);
 
             app.UseRouting();
             app.UseAuthentication();
