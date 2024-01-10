@@ -7,6 +7,7 @@ namespace examenporject_Frameworks_zenodesp.Models
 {
     public class Complaint
     {
+        [Key]
         public int Id { get; set; }
         [Display(Name = "Complaint")]
         public string Description { get; set; }

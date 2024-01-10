@@ -26,6 +26,9 @@
                 @Html.DisplayName("Gestuurd door")
             </th>
             <th>
+                @Html.DisplayName("Klachttype")
+            </th>
+            <th>
                 @Html.DisplayName("Verstuurd")
             </th>
             
@@ -39,8 +42,11 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EmployeeId)
+                @Html.DisplayFor(modelItem => item.complaintLogger.FirstName)
             </td>
+                <td>
+				@Html.DisplayFor(modelItem => item.ComplaintType.TypeName)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.created)
             </td>

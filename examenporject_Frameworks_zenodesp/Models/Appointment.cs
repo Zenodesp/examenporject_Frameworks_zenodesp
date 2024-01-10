@@ -6,6 +6,7 @@ namespace examenporject_Frameworks_zenodesp.Models
 {
     public class Appointment
     {
+        [Key]
         public int Id { get; set; }
         [Display(Name = "Appointment")]
         public string Description { get; set; }

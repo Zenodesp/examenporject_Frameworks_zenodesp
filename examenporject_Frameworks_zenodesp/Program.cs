@@ -1,7 +1,11 @@
 using examenporject_Frameworks_zenodesp.Areas.Identity.Data;
 using examenporject_Frameworks_zenodesp.Data;
+using GroupSacePrep.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using NETCore.MailKit.Infrastructure.Internal;
 
 namespace examenporject_Frameworks_zenodesp
 {
@@ -21,6 +25,29 @@ namespace examenporject_Frameworks_zenodesp
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 ;
+
+            //add mailkit services
+            builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
+            builder.Services.Configure<MailKitOptions>(options =>
+            {
+                options.Server = builder.Configuration["ExternalProviders:MailKit:SMTP:Address"];
+                options.Port = Convert.ToInt32(builder.Configuration["ExternalProviders:MailKit:SMTP:Port"]);
+                options.Account = builder.Configuration["ExternalProviders:MailKit:SMTP:Account"];
+                options.Password = builder.Configuration["ExternalProviders:MailKit:SMTP:Password"];
+                options.SenderEmail = builder.Configuration["ExternalProviders:MailKit:SMTP:SenderEmail"];
+                options.SenderName = builder.Configuration["ExternalProviders:MailKit:SMTP:SenderName"];
+
+                // Set it to TRUE to enable ssl or tls, FALSE otherwise
+                options.Security = false;  // true zet ssl or tls aan
+            });
+
+            // Add globalisation/localistaion services
+
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Translations");
+            builder.Services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -39,6 +66,16 @@ namespace examenporject_Frameworks_zenodesp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            var supportedCultures = new[]
+           {
+                "en-US", "fr", "nl"
+            };
+            var localisationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localisationOptions);
 
             app.UseRouting();
             app.UseAuthentication();

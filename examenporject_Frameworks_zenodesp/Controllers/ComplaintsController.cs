@@ -70,9 +70,16 @@ namespace examenporject_Frameworks_zenodesp.Controllers
         // GET: Complaints/Create
         public IActionResult Create()
         {
-            
+            // TypeList to check input
+            var TypeList = _context.ComplaintType.Where(t => t.deleted > DateTime.Now).OrderBy(t => t.TypeName);
+
             ViewData["ComplaintTypeId"] = new SelectList(_context.ComplaintType.Where(t => t.deleted > DateTime.Now).OrderBy(t => t.TypeName), "Id", "TypeName");
-            return View();
+
+            
+            return View(new Complaint
+            {
+                EmployeeId = _context.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id,
+            });
         }
 
         // POST: Complaints/Create

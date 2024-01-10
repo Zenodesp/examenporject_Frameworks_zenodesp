@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using examenporject_Frameworks_zenodesp.Data;
 
@@ -11,9 +12,11 @@ using examenporject_Frameworks_zenodesp.Data;
 namespace examenporject_Frameworks_zenodesp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231219085836_DepartmentOptional")]
+    partial class DepartmentOptional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -325,27 +328,6 @@ namespace examenporject_Frameworks_zenodesp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ComplaintType");
-                });
-
-            modelBuilder.Entity("examenporject_Frameworks_zenodesp.Models.Language", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
-
-                    b.Property<bool>("IsSystemLanguage")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("isAvailable")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
