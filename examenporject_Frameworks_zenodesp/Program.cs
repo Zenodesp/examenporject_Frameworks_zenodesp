@@ -2,6 +2,7 @@ using examenporject_Frameworks_zenodesp.Areas.Identity.Data;
 using examenporject_Frameworks_zenodesp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using NETCore.MailKit.Infrastructure.Internal;
 
 namespace examenporject_Frameworks_zenodesp
