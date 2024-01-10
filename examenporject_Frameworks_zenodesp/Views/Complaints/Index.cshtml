@@ -20,10 +20,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayName("Inhoud")
+                @Html.DisplayNameFor(model => model.Complaints[0].Description)
             </th>
             <th>
-                @Html.DisplayName("Gestuurd door")
+                @Html.DisplayNameFor(model => model.Complaints[0].complaintLogger.FirstName)
+            </th>
+            <th>
+                @Html.DisplayName("Klachttype")
             </th>
             <th>
                 @Html.DisplayName("Verstuurd")

@@ -2,6 +2,7 @@ using examenporject_Frameworks_zenodesp.Areas.Identity.Data;
 using examenporject_Frameworks_zenodesp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NETCore.MailKit.Infrastructure.Internal;
 
 namespace examenporject_Frameworks_zenodesp
 {
@@ -23,6 +24,10 @@ namespace examenporject_Frameworks_zenodesp
                 ;
             builder.Services.AddControllersWithViews();
 
+            //add RestFull API services
+            builder.Services.AddControllers();
+            builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApplicationName", Version = "v1" }); });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -40,6 +45,16 @@ namespace examenporject_Frameworks_zenodesp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            var supportedCultures = new[]
+           {
+                "en-US", "fr", "nl"
+            };
+            var localisationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localisationOptions);
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -56,6 +71,8 @@ namespace examenporject_Frameworks_zenodesp
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             app.Run();
         }
