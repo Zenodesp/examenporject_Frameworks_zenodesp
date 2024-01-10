@@ -1,0 +1,29 @@
+﻿@model RoleViewModel
+
+
+@{
+    ViewData["Title"] = "Wijzigen rollen";
+}
+
+<h1>Wijzigen rollen</h1>
+<hr />
+
+<div class="row">
+    <div class="col-nd-4">
+        <form asp-action="Roles" asp-controller="Users">
+            <input type="hidden" asp-for="UserName" />
+
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.UserName)
+                @Html.DisplayFor(model => model.UserName)
+            </div>
+            <div>
+                @Html.DisplayNameFor(model => model.Roles)
+                <select multiple="multiple" asp-for="Roles" class="form-control" asp-items="ViewBag.RoleId"/>"
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="bewaren" />
+            </div>
+        </form>
+    </div>
+</div>

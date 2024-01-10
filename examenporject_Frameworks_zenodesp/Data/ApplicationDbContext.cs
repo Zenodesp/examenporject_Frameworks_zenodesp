@@ -18,7 +18,24 @@ namespace examenporject_Frameworks_zenodesp.Data
         public static async Task DataInitialiser(ApplicationDbContext context, UserManager<EmployeeUser> userManager)
         {
 
-            if(!context.Users.Any())
+            if (!context.Languages.Any())
+            {
+                context.AddRange(
+                    new Language { Id = "-", Name = "-", IsSystemLanguage = false, isAvailable = DateTime.MinValue },
+                    new Language { Id = "en", Name = "English", IsSystemLanguage = true },
+
+                    new Language { Id = "nl", Name = "Nederlands", IsSystemLanguage = true },
+
+                    new Language { Id = "fr", Name = "Français", IsSystemLanguage = true },
+
+                    new Language { Id = "de", Name = "Deutsch", IsSystemLanguage = true }
+                    );
+                context.SaveChanges();
+            }
+
+            Language.GetLanguages(context);
+
+            if (!context.Users.Any())
             {
                 EmployeeUser dummyUser = new EmployeeUser
                 {
@@ -90,6 +107,8 @@ namespace examenporject_Frameworks_zenodesp.Data
         }
 
         public DbSet<examenporject_Frameworks_zenodesp.Models.ComplaintType> ComplaintType { get; set; } = default!;
+
+        public DbSet<examenporject_Frameworks_zenodesp.Models.Language> Languages { get; set; } = default!;
 
 
     }
