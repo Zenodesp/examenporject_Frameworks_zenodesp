@@ -66,6 +66,11 @@
         <div class="container">
             &copy; 2023 - examenporject_Frameworks_zenodesp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+        <div>
+          
+               @examenporject_Frameworks_zenodesp.Services.RequestTracker.Getmilestone(User.Identity.Name)
+            
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,5 +1,7 @@
+using AspNetCore.Unobtrusive.Ajax;
 using examenporject_Frameworks_zenodesp.Areas.Identity.Data;
 using examenporject_Frameworks_zenodesp.Data;
+using examenporject_Frameworks_zenodesp.Services;
 using GroupSacePrep.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -51,8 +53,11 @@ namespace examenporject_Frameworks_zenodesp
 
             builder.Services.AddControllersWithViews();
 
-            //add RestFull API services
-            builder.Services.AddControllers();
+			builder.Services.AddTransient<IMyUser, MyUser>();
+            
+
+			//add RestFull API services
+			builder.Services.AddControllers();
             builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApplicationName", Version = "v1" }); });
 
             var app = builder.Build();
@@ -82,7 +87,9 @@ namespace examenporject_Frameworks_zenodesp
 
             app.UseRequestLocalization(localisationOptions);
 
-            app.UseRouting();
+			app.UseUnobtrusiveAjax();
+
+			app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -98,6 +105,10 @@ namespace examenporject_Frameworks_zenodesp
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+
+            app.UseMiddleware<RequestTracker>();
+
+
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
