@@ -48,7 +48,7 @@ namespace examenporject_Frameworks_zenodesp.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["ComplaintId"] = new SelectList(_context.Complaints.Where(g => g.deleted > DateTime.Now), "Id", "UserName");
+            ViewData["ComplaintId"] = new SelectList(_context.Complaints.Where(g => g.deleted > DateTime.Now), "Id", "Description");
             return View();
         }
 
