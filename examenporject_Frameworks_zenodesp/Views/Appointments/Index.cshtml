@@ -16,7 +16,10 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Complaint)
+                @Html.DisplayNameFor(model => model.Complaint.Description)
+            </th>
+            <th>
+				@Html.DisplayNameFor(model => model.Employee.FirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.created)
@@ -35,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Complaint.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.created)

@@ -123,13 +123,13 @@
   <data name="Complaint Type" xml:space="preserve">
     <value>Complaint Type</value>
   </data>
-  <data name="Deleted On" xml:space="preserve">
+  <data name="Deleted on" xml:space="preserve">
     <value>Deleted On</value>
   </data>
   <data name="Posted By" xml:space="preserve">
     <value>Posted By</value>
   </data>
-  <data name="Posted On" xml:space="preserve">
+  <data name="Posted on" xml:space="preserve">
     <value>Posted On</value>
   </data>
 </root>

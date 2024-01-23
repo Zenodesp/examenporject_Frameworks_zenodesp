@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Complaint" xml:space="preserve">
-    <value>Klacht</value>
-  </data>
   <data name="Complaint Type" xml:space="preserve">
     <value>Klachttype</value>
-  </data>
-  <data name="Deleted on" xml:space="preserve">
-    <value>Verwijderd</value>
-  </data>
-  <data name="Posted by" xml:space="preserve">
-    <value>Van</value>
-  </data>
-  <data name="Posted on" xml:space="preserve">
-    <value>Aangemaakt</value>
   </data>
 </root>
